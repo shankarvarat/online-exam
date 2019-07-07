@@ -15,7 +15,12 @@ def index(request):
     return render(request,'index.html',{'form':form})
 
 
-def profile(request):
+def uprofile(request):
+    u = User.objects.get(username=request.user)
+    try:
+        profile1 = profile.objects.get(username=u)
+    except:
+        profile1 = "Not found"
     form=profileform
     if request.method =="POST":
         f=form(request.POST)
@@ -28,13 +33,22 @@ def profile(request):
     else:
         m="not ok"
 
-        return render(request,'profile.html',{'form':form,'m':m})
+        return render(request,'profile.html',{'form':form,'m':m,'profile1':profile1})
 
 def signup(request):
     form=UserCreationForm
+    if request.method=='POST':
+        f=form(request.POST)
+        if f.is_valid():
+            f.save()
+            return redirect('/index')
+        else:
+            m="Invalid data !!"
+            return HttpResponse("Not valid Data")
+
 
     return render(request,'signup.html',{'form':form})
-def login(request):
+def loginu(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -50,7 +64,16 @@ def login(request):
             print("They used username: {} and password: {}".format(username, password))
             return HttpResponse("Invalid login details given")
     else:
-        return render(request, 'login.html', {})
+        return render(request, 'login.html')
+def logoutu(request):
+            logout(request)
+            return redirect("/index")
 
-
+def texam(request):
+    u=User.objects.get(username=request.user)
+    try:
+        profile1=profile.objects.get(username=u)
+    except:
+        profile1="Not found"
+    return render(request,'texam.html',{'u':u,'profile1':profile1})
 

@@ -4,7 +4,11 @@ from .views import *
 urlpatterns = [
     path('index', index),
     path('profile',profile,name='profile'),
-    path('login',login ),
-    path('signup', signup),
+    path('',loginu,name='loginu' ),
+    path('loginu', loginu, name='loginu'),
+
+    path('signup', signup,name='signup'),
+    path('logoutu',logoutu,name='logoutu'),
+    path('texam', texam,name='texam'),
 
 ]

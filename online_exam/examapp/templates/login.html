@@ -1,16 +1,30 @@
-{% extends 'base.html' %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<div>
+    <div>
+        <h1> Login</h1>
+        <form method="POST" action="loginu">
+                        {%csrf_token%}
 
-<h1> Login Form</h1>
+            <label>Username : </label>
+            <input type="text" name="username"><br>
+            <label>Password : </label>
+            <input type="password" name="password">
+            <br>
+            <input type="submit" value="Login !!">
 
-<form method="POST" action="login">
-     {% csrf_token %}
-    <label> username :</label>
-    <input type="text" name="username">
-    <br>
-    <label>password</label>
-    <input type="password" name="password"><br>
-    <input TYPE="submit" value="Login !!">
-</form>
+            <br><br>
 
-{%endblock%}
+
+        </form>
+    </div>
+
+    <BR>
+    <button><a href="/signup">Signup</a></button>
+</div>
+</body>
