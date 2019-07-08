@@ -16,24 +16,30 @@ def index(request):
 
 
 def uprofile(request):
-    u = User.objects.get(username=request.user)
-    try:
-        profile1 = profile.objects.get(username=u)
-    except:
-        profile1 = "Not found"
-    form=profileform
-    if request.method =="POST":
-        f=form(request.POST)
-        if f.is_valid():
-            f.save()
-            return redirect('/index')
-        else:
-            m="Form is invalid"
-            return render(request, 'profile.html', {'f': f,'m':m})
-    else:
-        m="not ok"
 
-        return render(request,'profile.html',{'form':form,'m':m,'profile1':profile1})
+
+            u = User.objects.get(username=request.user)
+            try:
+                profile1 = profile.objects.get(username=u)
+            except:
+                profile1 = "Not found"
+            return render(request, 'eprofile.html', {'profile1': profile1})
+
+
+def eprofile(request):
+            form=profileform
+            if request.method =="POST":
+                f=form(request.POST)
+                if f.is_valid():
+                    f.save()
+                    return redirect('/index')
+                else:
+                    m="Form is invalid"
+                    return render(request, 'eprofile', {'form': form})
+            else:
+                return render(request, 'eprofile.html', {'form':form})
+
+                #return render(request,'uprofile',{'form':form})
 
 def signup(request):
     form=UserCreationForm
@@ -70,10 +76,36 @@ def logoutu(request):
             return redirect("/index")
 
 def texam(request):
-    u=User.objects.get(username=request.user)
+            u=User.objects.get(username=request.user)
+            try:
+                profile1=profile.objects.get(username=u)
+            except:
+                profile1="Not found"
+            ques=questions.objects.all()
+            tq=len(ques)
+            return render(request,'texam.html',{'u':u,'profile1':profile1,'ques':ques,'tq':tq})
+
+def uans(request):
+    u = User.objects.get(username=request.user)
     try:
-        profile1=profile.objects.get(username=u)
+        profile1 = profile.objects.get(username=u)
     except:
-        profile1="Not found"
-    return render(request,'texam.html',{'u':u,'profile1':profile1})
+        profile1 = "Not found"
+    ques = questions.objects.all()
+    form=uaform()
+
+    tq = len(ques)
+    if request.method=="POST":
+        f=uaform(request.POST)
+
+        if f.is_valid:
+            f.save()
+            return redirect('/texam')
+        else:
+            m='form is not valid'
+            return render(request, 'uans.html', {'m': m, 'profile1': profile1, 'ques': ques, 'tq': tq})
+
+    return render(request, 'uans.html', {'u': u, 'profile1': profile1, 'ques': ques, 'tq': tq})
+
+
 

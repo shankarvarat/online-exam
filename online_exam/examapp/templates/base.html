@@ -3,6 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Online Exam</title>
+    <script type="text/javascript">
+        var timeleft = {{time}};
+var downloadTimer = setInterval(function(){
+  document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
+  timeleft -= 1;
+  if(timeleft <= 0){
+    clearInterval(downloadTimer);
+    document.getElementById("countdown").innerHTML = "Finished"
+  }
+}, 1000);
+    </script>
     <style>
         body{
         background-color: pink;
@@ -21,14 +32,25 @@
 
     <div id="menu">
         <h4>
+            {% if user.is_active %}
+
             <h3>
                 <a href="logoutu"> LogOut</a><br>
-                <a href="Profile"> Profile</a><br>
+                <a href="uprofile"> Profile</a><br>
+                                <a href="eprofile">  Edit Profile</a><br>
+
                 <a href="texam"> Exam</a><br>
         <a href="result"> Result</a><br>
-        <a href="profile.html"> Profile</a><br>
+        <a href="index"> Home</a><br>
+                        <a href="uans"> uans</a><br>
+
 
             </h3>
+            {% else%}
+            <<a href="loginu"> Login</a><br>
+                <a href="signup"> Signup </a><br>
+
+            {% endif %}
         </h4>
 
 

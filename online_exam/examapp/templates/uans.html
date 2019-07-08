@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{%block content %}
+
+<h1> welcome !!{{user}}</h1>
+<h2 id="countdown"></h2>
+<br><h1>{{m}}</h1>
+<h5> Total questions : {{tq}}</h5>
+<form method="POST" action="uans">
+    {%csrf_token%}
+
+    {% for i in ques%}
+
+    <br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br>
+
+
+    <label>Question no  :{{i.question}}</label>
+    <br><br>
+    {{i.a1}}
+    <input type="checkbox" class="a" value="a1" name="a1">
+    <br>
+    <br>
+        {{i.a1}}
+
+    <input type="checkbox" class="a" value="a2" name="a2">
+    <br><br>
+        {{i.a2}}
+
+    <input type="checkbox" class="a" value="a3" name="a3">
+    <br><br>
+        {{i.a3}}
+
+    <input type="checkbox" class="a" value="a4" name="a4">
+    <br>
+
+
+
+
+
+
+
+    {%endfor%}
+        <input type="submit">
+
+
+</form>
+{%endblock%}
