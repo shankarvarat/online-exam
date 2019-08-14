@@ -1,2 +1,2 @@
 # online-exam
-online exam in python django
+Online user can create account, login, logout, take exam, see result  
