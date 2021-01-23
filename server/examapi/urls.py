@@ -21,7 +21,10 @@ Including another URLconf
 # ]
 from django.contrib import admin
 from django.urls import path
-app_name = 'backend'
+from . import views
+# app_name = 'backend'
 urlpatterns = [
-    path('examapi/admin/', admin.site.urls),
+    # path('examapi/admin/', admin.site.urls),
+    path('api/hello/', views.hello, name='hello'),
+
 ]
